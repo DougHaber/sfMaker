@@ -47,10 +47,10 @@ var base64 = sfmaker.generateBase64('w=Square,v=16.753,s=45');
 var sounds = [];
 var x;
 
-for (x = 0; x < 5; x++) \{
+for (x = 0; x < 5; x++) {
   sounds[x] = document.createElement('audio');
   sounds[x].src = base64;
-\}</pre>
+}
 ```
 
 ### Advanced Usage
