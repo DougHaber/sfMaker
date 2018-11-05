@@ -53,13 +53,13 @@ function SFMaker() {
         'sustain': { code: 'b', defaultValue: 0.2 },
         'release': { code: 'r', defaultValue: 0.0 },
         'mode': { code: 'M', defaultValue: 'w' },
-	'randomSeed': { code: 'E', defaultValue: 123 },
-	'noiseWaveType': { code: 'e', defaultValue: 'Square' },
-	'noiseChangeTime': { code: 'N', defaultValue: 50 },
-	'noiseChangeRange': { code: 'F', defaultValue: 256 },
-	'noiseChangeStyle': { code: 'B', defaultValue: 'Random' },
-	'noiseNoteReset': { code: 'R', defaultValue: 'Off' },
-	'lowPassAlpha': { code: 'g', defaultValue: 0 }
+        'randomSeed': { code: 'E', defaultValue: 123 },
+        'noiseWaveType': { code: 'e', defaultValue: 'Square' },
+        'noiseChangeTime': { code: 'N', defaultValue: 50 },
+        'noiseChangeRange': { code: 'F', defaultValue: 256 },
+        'noiseChangeStyle': { code: 'B', defaultValue: 'Random' },
+        'noiseNoteReset': { code: 'R', defaultValue: 'Off' },
+        'lowPassAlpha': { code: 'g', defaultValue: 0 }
     };
 
     this.paramCodes = {};
@@ -78,11 +78,11 @@ SFMaker.prototype._getSample = function (a, state, volAdj) {
     var x;
 
     if (currentPhase != state.lastPhase && currentPhase == 1) {
-    	state.newPeriod = true;
-    	state.periodCounter++;
+        state.newPeriod = true;
+        state.periodCounter++;
     }
     else {
-    	state.newPeriod = false;
+        state.newPeriod = false;
     }
 
     base = this._updateState(a, state);
@@ -99,21 +99,21 @@ SFMaker.prototype._getSample = function (a, state, volAdj) {
             s = (base > a['duty'] + state.dutySweep) ? sampleRange : (0 - sampleRange);
             break;
         case 'Sawtooth':
-	    var duty = (1 - Math.abs(a['duty'] + state.dutySweep));
+            var duty = (1 - Math.abs(a['duty'] + state.dutySweep));
 
-	    if (base > duty) {
-		state.phase = -1;
-	    }
-	    else {
-		state.phase += (1 / state.periodLength) * (1 + (1 - duty)) * 2;
+            if (base > duty) {
+                state.phase = -1;
+            }
+            else {
+                state.phase += (1 / state.periodLength) * (1 + (1 - duty)) * 2;
 
-		if (state.phase > 1) {
-		    state.phase = -1;
-		}
-	    }
+                if (state.phase > 1) {
+                    state.phase = -1;
+                }
+            }
 
             s = state.phase * sampleRange;
-	    break;
+            break;
          case 'Foo':
             (base > a['duty'] + state.dutySweep) ? state.phase += state.inc + state.dutySweep :
                 state.phase -= state.inc + state.dutySweep;
@@ -130,24 +130,24 @@ SFMaker.prototype._getSample = function (a, state, volAdj) {
         if (s > sampleRange) { s = sampleRange; this.clip++; }
         else if (s < 0 - sampleRange) { s = 0 - sampleRange; this.clip++; }
 
-	s = Math.round(s * volAdj * a['volume']);
+        s = Math.round(s * volAdj * a['volume']);
 
-	// Volumes greater than 1 can require clipping again
+        // Volumes greater than 1 can require clipping again
         if (s > sampleRange) { s = sampleRange; this.clip++; }
         else if (s < 0 - sampleRange) { s = 0 - sampleRange; this.clip++; }
 
-	if (this.waveFile.bitsPerSample == 8) {
-	    // 8 bit samples are unsigned
-	    s += sampleRange;
-	}
+        if (this.waveFile.bitsPerSample == 8) {
+            // 8 bit samples are unsigned
+            s += sampleRange;
+        }
 
-	// Filters
-	if (state.lastSample) {
-	    if (a['lowPassAlpha']) { s += a['lowPassAlpha'] * (state.lastSample - s); }
-	}
+        // Filters
+        if (state.lastSample) {
+            if (a['lowPassAlpha']) { s += a['lowPassAlpha'] * (state.lastSample - s); }
+        }
 
-	state.lastSample = s;
-	state.lastVolume = volAdj;
+        state.lastSample = s;
+        state.lastVolume = volAdj;
     }
 
     for (x = 0; x < this.waveFile.bitsPerSample / 8; x++) {
@@ -168,7 +168,7 @@ SFMaker.prototype.addSilence = function(a, state) {
 
     for (startPosition = state.x; state.x <= samples + startPosition; state.x++) {
         this._getSample(a, state, ((samples - (state.x - startPosition)) / samples) * lastVolume / Math.log(x));
-	x += 0.5;
+        x += 0.5;
     }
 };
 
@@ -178,20 +178,20 @@ SFMaker.prototype.getFrequency = function(note, octave) {
     var halfSteps;
 
     if (! note.match(/^[A-Gacdfg]$/)) {
-	return (0);
+        return (0);
     }
 
     for (halfSteps = 0; halfSteps < order.length; halfSteps++) {
-	if (order[halfSteps] == note) {
-	    break;
-	}
+        if (order[halfSteps] == note) {
+            break;
+        }
     }
 
     if (halfSteps < 3) {
-	halfSteps += (octave - 4) * 12;
+        halfSteps += (octave - 4) * 12;
     }
     else {
-	halfSteps += (octave - 5) * 12;
+        halfSteps += (octave - 5) * 12;
     }
 
     return (440 * Math.pow(2, halfSteps / 12));
@@ -207,33 +207,33 @@ SFMaker.prototype.generateSong = function(a) {
     this.defaultOctave = 4;
 
     for (x = 0; x < length; x++) {
-	if (a['noiseNoteReset'] == 'On') {
-	    this.randomSetSeed(a['randomSeed']);
-	}
+        if (a['noiseNoteReset'] == 'On') {
+            this.randomSetSeed(a['randomSeed']);
+        }
 
-	note = a['song'][x];
-	octave = (x + 1 < length) ? a['song'][x + 1] : '';
+        note = a['song'][x];
+        octave = (x + 1 < length) ? a['song'][x + 1] : '';
 
-	if (! octave.match(/^\d$/)) { octave = this.defaultOctave; }
-	else { x++; }
+        if (! octave.match(/^\d$/)) { octave = this.defaultOctave; }
+        else { x++; }
 
-	if (note == 'O') { // Support 'O' for default octave changes
-	    this.defaultOctave = octave;
-	    continue;
-	}
+        if (note == 'O') { // Support 'O' for default octave changes
+            this.defaultOctave = octave;
+            continue;
+        }
 
-	a['frequency'] = this.getFrequency(note, octave);
+        a['frequency'] = this.getFrequency(note, octave);
 
         if (state) {
-	    state.startFrequency = a['frequency'];
-	    state.baseFrequency = a['frequency'];
-	    state.frequencyModifier = 0;
+            state.startFrequency = a['frequency'];
+            state.baseFrequency = a['frequency'];
+            state.frequencyModifier = 0;
             state.step = 1;
-	    state.wavePosition = 0;
-	    state.inc = (2 * Math.PI * a['frequency'] / this.waveFile.sampleRate),
-	    state.newPeriod = true; // Starting a new period
-	    state.periodCounter = 0;
-	}
+            state.wavePosition = 0;
+            state.inc = (2 * Math.PI * a['frequency'] / this.waveFile.sampleRate),
+            state.newPeriod = true; // Starting a new period
+            state.periodCounter = 0;
+        }
 
         state = this.generateWave(a, state);
         state.frequencyChangePoint += this.waveFile.sampleRate * a['length'];
@@ -247,18 +247,18 @@ SFMaker.prototype._updateState = function(a, state) {
     a['volume'] = state.startVolume;
 
     if (a['noise']) {
-	if (a['noiseChangeStyle'] == 'Random') {
-	    if (Math.round(this.random() * a['noiseChangeTime']) == 0) {
-		state.frequencyModifier = 0 - state.baseFrequency + state.startFrequency + this.random() * a['noiseChangeRange'];
-	    }
-	}
-	else if (state.x % a['noiseChangeTime'] == 0) { // Fixed change time
-	    state.frequencyModifier = 0 - state.baseFrequency + state.startFrequency + this.random() * a['noiseChangeRange'];
-	}
+        if (a['noiseChangeStyle'] == 'Random') {
+            if (Math.round(this.random() * a['noiseChangeTime']) == 0) {
+                state.frequencyModifier = 0 - state.baseFrequency + state.startFrequency + this.random() * a['noiseChangeRange'];
+            }
+        }
+        else if (state.x % a['noiseChangeTime'] == 0) { // Fixed change time
+            state.frequencyModifier = 0 - state.baseFrequency + state.startFrequency + this.random() * a['noiseChangeRange'];
+        }
     }
 
     if (a['vibratoFrequency']) {
-	state.frequencyModifier += (Math.sin(state.vibratoInc * (state.x + 1))) * (a['vibratoDepth'] * state.vibratoInc);
+        state.frequencyModifier += (Math.sin(state.vibratoInc * (state.x + 1))) * (a['vibratoDepth'] * state.vibratoInc);
     }
 
     if (a['tremeloFrequency']) {
@@ -281,15 +281,15 @@ SFMaker.prototype._updateState = function(a, state) {
     }
 
     if (state.newPeriod) {
-	var previousInc = state.inc;
+        var previousInc = state.inc;
 
-	a['frequency'] = state.baseFrequency + state.frequencyModifier;
-	state.inc = 2 * Math.PI * a['frequency'] / this.waveFile.sampleRate;
-	state.periodLength = this.waveFile.sampleRate / a['frequency'];
+        a['frequency'] = state.baseFrequency + state.frequencyModifier;
+        state.inc = 2 * Math.PI * a['frequency'] / this.waveFile.sampleRate;
+        state.periodLength = this.waveFile.sampleRate / a['frequency'];
 
-	if (previousInc != state.inc) {
-	    state.wavePosition = 1;
-	}
+        if (previousInc != state.inc) {
+            state.wavePosition = 1;
+        }
     }
 
     return (Math.sin(state.inc * state.wavePosition)); // Base frequency
@@ -305,29 +305,29 @@ SFMaker.prototype.generateWave = function(a, state) {
     if (! state) {
         state = {
             x: 0, // Sample counter
-	    wavePosition: 0, // Position within a waveform
+            wavePosition: 0, // Position within a waveform
             phase: 0, // Phase state.  Usage depends on waveform type
-	    inc: (2 * Math.PI * a['frequency'] / sampleRate),
-	    periodLength: sampleRate / a['frequency'],
+            inc: (2 * Math.PI * a['frequency'] / sampleRate),
+            periodLength: sampleRate / a['frequency'],
             pos: 0, // file position
             lastSample: 0,
-	    lastVolume: 0,
+            lastVolume: 0,
             totalADSR: a['attack'] + a['decay'] + a['sustain'] + a['release'],
             startFrequency: a['frequency'], // The initial frequency
             baseFrequency: a['frequency'],  // Our core "center" frequency
-	    frequencyModifier: 0, // The change from the "base"
+            frequencyModifier: 0, // The change from the "base"
             startVolume: a['volume'],
             vibratoInc: (2 * Math.PI * a['vibratoFrequency'] / sampleRate) || 0,
             tremeloInc: (2 * Math.PI * a['tremeloFrequency'] / sampleRate) || 0,
-	    dutySweepInc: (2 * Math.PI * a['dutySweepFrequency'] / sampleRate) || 0,
+            dutySweepInc: (2 * Math.PI * a['dutySweepFrequency'] / sampleRate) || 0,
             dutySweep: 0, // Sweep adjustment to the duty
             step: 1,
             stepSamples: Math.round(sampleRate * a['length'] / a['steps']),  // Number of samples per step
             frequencyChangePoint: Math.round((a['frequencyChangeTime'] * sampleRate * a['length'] / 100)),
-	    newPeriod: true, // Starting a new period
-	    periodCounter: 0,
-	    lastPhase: 1, // Used for determining when a new period begins
-	    base: 0 // Our position within a sine wave.  Used for various effects
+            newPeriod: true, // Starting a new period
+            periodCounter: 0,
+            lastPhase: 1, // Used for determining when a new period begins
+            base: 0 // Our position within a sine wave.  Used for various effects
         };
     }
 
@@ -374,21 +374,21 @@ SFMaker.prototype.generateSound = function(a) {
     this.waveFile.setFormat(a['sampleRate'], this.bitsPerSample, 1);
 
     if (a['waveType'] == 'Noise') {
-	a['noise'] = true;
-	a['waveType'] = a['noiseWaveType'];
+        a['noise'] = true;
+        a['waveType'] = a['noiseWaveType'];
     }
 
     if (a['stepDirection'] == 'Down') {
-	a['stepDelta'] = 0 - a['stepDelta'];
+        a['stepDelta'] = 0 - a['stepDelta'];
     }
 
     this.randomSetSeed(a['randomSeed']);
 
     if (a['mode'] == 's') {
-	state = this.generateSong(a);
+        state = this.generateSong(a);
     }
     else {
-	state = this.generateWave(a);
+        state = this.generateWave(a);
     }
 
     this.addSilence(a, state);
