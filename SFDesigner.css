@@ -94,3 +94,12 @@ span.labelSmall {
     font-weight: bold;
     width: 2.2em;
 }
+
+a#soundLink {
+    font-size: 16pt;
+    color: blue;
+}
+
+a#soundLink:visited {
+    color: blue;
+}

@@ -47,6 +47,10 @@ function SFDesigner(parentNode, attrib) {
     this.table.className = 'SFDesigner';
     this._createHeadingRow();
 
+    this.soundLink = document.createElement('a'); // Link to the current sound
+    this.soundLink.id = 'soundLink';
+    this.soundLink.innerHTML = 'Link to Sound';
+
     this.tableTR = this.table.insertRow(2);
     this._createLeftPresetSection();
     this._createParameterSection();
@@ -56,6 +60,7 @@ function SFDesigner(parentNode, attrib) {
     this._initModeUI();
 
     this.readPageParameters();
+    this.updateSoundLink();
 
     this.parentNode.appendChild(this.table);
 };
@@ -385,6 +390,9 @@ SFDesigner.prototype._createSaveSection = function() {
     this.saveSection.appendChild(this.fileName);
     this._createButton(this.saveSection, 'Save Wave', function() { self.saveWave() },
                        { title: 'shortcut: CTRL+S' });
+
+    this.saveSection.appendChild(document.createElement('hr'));
+    this.saveSection.appendChild(this.soundLink);
 };
 
 
@@ -500,7 +508,7 @@ SFDesigner.prototype.loadDefaults = function() {
 };
 
 
-SFDesigner.prototype.generateLink = function() {
+SFDesigner.prototype.updateSoundLink = function() {
     var p = this.readParams();
     var soundText = this.sfmaker.generateSoundText(p);
     var link = document.location.href.replace(/[\?\#].*$/, '');
@@ -509,7 +517,8 @@ SFDesigner.prototype.generateLink = function() {
         link += "?sound=" + encodeURIComponent(soundText);
     }
 
-    return (link);
+    console.log("HREF=",link);
+    this.soundLink.href = link;
 };
 
 
@@ -1454,6 +1463,8 @@ SFDesigner.prototype._updateSoundText = function(p, noHistory) {
 
         this.previousSoundButton.disabled = false;
     }
+
+    this.updateSoundLink();
 };
 
 
@@ -1494,3 +1505,4 @@ SFDesigner.prototype.getParameters = function() {
 
     return (parameters);
 };
+
