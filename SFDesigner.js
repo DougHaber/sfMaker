@@ -517,7 +517,6 @@ SFDesigner.prototype.updateSoundLink = function() {
         link += "?sound=" + encodeURIComponent(soundText);
     }
 
-    console.log("HREF=",link);
     this.soundLink.href = link;
 };
 
