@@ -385,11 +385,6 @@ SFDesigner.prototype._createSaveSection = function() {
     this.saveSection.appendChild(this.fileName);
     this._createButton(this.saveSection, 'Save Wave', function() { self.saveWave() },
                        { title: 'shortcut: CTRL+S' });
-
-    this.saveSection.appendChild(document.createElement('hr'));
-    this.saveSection.appendChild(document.createTextNode("Create a Link to this Sound"));
-    this.saveSection.appendChild(document.createElement('br'));
-    this._createButton(this.saveSection, 'Share', function() { self.shareSound() });
 };
 
 
@@ -515,23 +510,6 @@ SFDesigner.prototype.generateLink = function() {
     }
 
     return (link);
-};
-
-SFDesigner.prototype.shareSound = function(e) {
-    // Create a link to the current sound
-    var link = this.generateLink();
-    // var h = eju.util.HTML;
-
-    // eju.ui.dialog(
-    //     h.div({ style: { fontSize: '16px', textAlign: 'center' } }, h.collection([
-    //         h.text("Share a link directly to this sound:"),
-    //         h.br(),
-    //         h.div({ style: { height: '12px' }}, ' '),
-    //         h.a({ href: link }, 'Direct Link')
-    //     ])),
-    //     400, 200, false, { title: 'Link to this Sound', keys: this.keys });
-
-    // return (eju.stopEvent(e || window.event));
 };
 
 
