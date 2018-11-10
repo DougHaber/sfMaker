@@ -843,7 +843,7 @@ SFDesigner.prototype._createLossSound = function() {
 
 
 SFDesigner.prototype._createPowerUpSound = function() {
-    this._randomizeRadio(this.ui['waveType'], [0, 1, 2, 4, 5]);
+    this._randomizeRadio(this.ui['waveType'], [0, 1, 2, 4]);
     this._randomizeRadio(this.ui['sampleRate'], [0, 1, 2, 3]);
     this._randomize(this.ui['frequency'], 100, 4000);
     this._randomize(this.ui['vibratoFrequency'], 0, 250);
@@ -873,7 +873,7 @@ SFDesigner.prototype._createPowerUpSound = function() {
 
 
 SFDesigner.prototype._createPickupSound = function() {
-    this._randomizeRadio(this.ui['waveType'], [0, 1, 2, 4, 5]);
+    this._randomizeRadio(this.ui['waveType'], [0, 1, 2, 4]);
     this._randomizeRadio(this.ui['sampleRate'], [0, 1, 2, 3]);
     this._randomize(this.ui['frequency'], 900, 4000);
     this._randomize(this.ui['vibratoFrequency'], 0, 250);
