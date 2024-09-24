@@ -2,14 +2,12 @@
 
 SFMaker is a tool used for generating sound effects reminiscent of those found in old video games. It was originally written during the [HTML5 Tools Jam](http://bostongamejams.com/2011/01/15/html5-tools-jam-awesomeness/) from [BostonGameJams.com](http://bostongamejams.com/). The program was inspired by [SFXR](http://www.drpetter.se/project_sfxr.html), but it is an original work and uses no code or algorithms from SFXR.
 
-**NOTE:** This branch is a work in progress.  The big remaining item is documentation updates in this file.  Please feel free to test this release and report any issues.
-
-
 # Usage
 
 * [Use SFMaker Online](http://www.leshylabs.com/apps/sfMaker/)
 
 ## Song Mode
+
 When using song mode, instead of the parameters defining a single sound they define how to produce a note.  The "Song" parameter is then used to provide a list of notes.  The "Start Frequency" parameter is ignored, and each note's start frequency is the actual frequency of the note.  The "Length" parameter in song mode refers to the length of a note, rather than the generated sound as a whole.
 
 In song mode the letters 'A' through 'G' are used to define notes. When lower case the sharp of that note is played, except for 'b' and 'e' which do not have sharps.
