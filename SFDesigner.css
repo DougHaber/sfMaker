@@ -1,0 +1,105 @@
+table.SFDesigner tr.titleRow td {
+    background-color: #5f855f;
+    text-align: center;
+    font-size: 16pt;
+    font-weight: bold;
+    border: 1px solid black;
+    background: #98d998;
+    background: linear-gradient(to bottom, #98d998 0%, #087208 100%);
+    border-radius: 10px 10px 0px 0px;
+}
+
+table.SFDesigner tr.titleRow2 td {
+    background-color: #5f855f;
+    border: 1px solid black;
+    color: #b8e0bb;
+    padding-left: 3px;
+}
+
+table.SFDesigner tr td.presetsSection {
+    vertical-align: top;
+    font-size: 11px;
+    background-color: rgb(185,201,185);
+    width: 105px;
+    border: 1px dotted black;
+    border-radius: 0px 0px 0px 10px;
+    text-align: center;
+}
+
+table.SFDesigner tr td.parametersSection {
+    vertical-align: top;
+    font-size: 11px;
+    background-color: rgb(185,201,185);
+    width: 420px;
+    border: 1px dotted black;
+    padding-left: 5px;
+}
+
+table.SFDesigner tr td.saveSection {
+    vertical-align: top;
+    font-size: 11px;
+    background-color: rgb(185,201,185);
+    width: 183px;
+    border: 1px dotted black;
+    border-radius: 0px 0px 10px 0px;
+    padding-left: 2px;
+}
+
+span.clipSpan {
+    background-color: red;
+    float: right;
+}
+
+span.radioLabel {
+    display: inline-block;
+    width: 11em;
+}
+
+span.labelSmall {
+    display: inline-block;
+    width: 2.2em;
+}
+
+span.bold {
+    font-weight: bold;
+}
+
+input.range {
+    width: 205px;
+}
+
+input.rangeText {
+    margin-right: 10px;
+}
+
+input.rangeSmall {
+    width: 125px;
+    margin-right: 11px;
+}
+
+input.rangeTextSmall {
+    margin-left: 3px;
+    margin-right: 3px;
+    width: 2em;
+}
+
+span.label {
+    display: inline-block;
+    font-weight: bold;
+    width: 11em;
+}
+
+span.labelSmall {
+    display: inline-block;
+    font-weight: bold;
+    width: 2.2em;
+}
+
+a#soundLink {
+    font-size: 16pt;
+    color: blue;
+}
+
+a#soundLink:visited {
+    color: blue;
+}

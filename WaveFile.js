@@ -1,29 +1,17 @@
 // **************************************************************
-//  Copyright (c) 2013, Leshy Labs LLC
+//  Copyright (c) 2013-2018, Leshy Labs LLC
 //  All rights reserved.
-//      www.leshylabs.com
 // **************************************************************
-//    This file is part of SFMaker.
-//
-//    SFMaker is free software: you can redistribute it and/or
-//    modify it under the terms of version 3 of the GNU Lesser
-//    General Public License as published by the Free Software
-//    Foundation.
-//
-//    SFMaker is distributed in the hope that it will be useful,
-//    but WITHOUT ANY WARRANTY; without even the implied warranty of
-//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//    GNU Lesser General Public License for more details.
-//
-//    You should have received a copy of the GNU Lesser General
-//    Public License along with SFMaker.  If not, see
-//    <http://www.gnu.org/licenses/>.
-// **************************************************************
-// **************************************************************
-// * Initialization
+//  This file is part of SFMaker.
+//  Please see the LICENSING file for licensing information.
 // **************************************************************
 
 "use strict";
+
+
+// **************************************************************
+// * Initialization
+// **************************************************************
 
 function WaveFile(attrib) {
     this.setFormat(8000, 8, 1);
@@ -40,12 +28,14 @@ function WaveFile(attrib) {
     }
 };
 
+
 WaveFile.prototype.setFormat = function (sampleRate, bitsPerSample, numChannels) {
     this.sampleRate = sampleRate;
     this.bitsPerSample = bitsPerSample;
     this.numChannels = numChannels;
     this.sampleRange = Math.pow(2, this.bitsPerSample) / 2 - 1;
 };
+
 
 // **************************************************************
 // * Wavefile Building
@@ -70,6 +60,7 @@ WaveFile.prototype._setHeader = function (position, length, data) {
         }
     }
 };
+
 
 // **************************************************************
 // * Interfaces
@@ -107,6 +98,7 @@ WaveFile.prototype.generateFile = function () {
         file[44 + x] = data[x];
     }
 };
+
 
 WaveFile.prototype.encodeBase64 = function () {
     // Encode the file byte array into base64
@@ -150,11 +142,13 @@ WaveFile.prototype.encodeBase64 = function () {
     }
 };
 
+
 WaveFile.prototype.generateBase64 = function () {
     this.generateFile();
 
     return (this.encodeBase64());
 };
+
 
 WaveFile.prototype.generateAudioTag = function () {
     var audio = document.createElement('audio');
@@ -164,6 +158,7 @@ WaveFile.prototype.generateAudioTag = function () {
 
     return (audio);
 };
+
 
 WaveFile.prototype.play = function () {
     // Generate and play a wave file
