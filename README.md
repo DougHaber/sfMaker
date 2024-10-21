@@ -26,8 +26,8 @@ sfMaker.js.  SFDesigner.js is only used for the designer GUI, and so
 should not be included.
 
 ```html
-  <script type="text/javascript" src="WaveFile.js">
-  <script type="text/javascript" src="sfMaker.js">
+  <script type="text/javascript" src="WaveFile.js"></script>
+  <script type="text/javascript" src="sfMaker.js"></script>
 ```
 
 To create an `<audio>` element from sound text:
